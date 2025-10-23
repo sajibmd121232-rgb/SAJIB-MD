@@ -22,8 +22,10 @@ body {
   "Hiragino Sans",
   Meiryo,
   sans-serif;
-  background: #EEEEEE;
+  background-image: url(../wallpapersden.com_geometric-shapes-pattern_5472x3648.jpg);
+  background-size: cover;
   overflow: hidden;
+
 }
 /*******************************************************/
 /* ヘッダー                                             */
@@ -152,4 +154,5 @@ footer> p {
 	.f-item {
 	font-size:70%;
 	}
+
 }
