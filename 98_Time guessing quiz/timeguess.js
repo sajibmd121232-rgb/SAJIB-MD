@@ -6,6 +6,11 @@ const start = document.getElementById("start");
 const stop = document.getElementById("stop");
 const reset = document.getElementById("reset");
 
+const soundStart = new Audio("sound/start.mp3");
+const soundStop1 = new Audio("sound/stop1.mp3");
+const soundStop2 = new Audio("sound/stop2.mp3");
+const soundReset = new Audio("sound/reset.mp3");
+
 let startTime;       // Startボタンクリック時の時刻
 let timeoutid;       // ID
 let stopTime = 0;    // Stopまでの経過時間
@@ -18,35 +23,53 @@ setButtonStateInitial();
 // Startボタンクリック
 ////////////////////////
 start.addEventListener("click",
-  function() {
+  function () {
     // ボタンをタイマー"動作中"状態とする
     setButtonStateRunning();
     startTime = Date.now();
     countUp();
-  },false
+    soundStart.play();
+  }, false
 );
 
 ////////////////////////
 // Stopボタンクリック
 ////////////////////////
 stop.addEventListener("click",
-  function() {
+  function () {
     // タイマーを"停止中"状態とする
     setButtonStateStopped();
     clearTimeout(timeoutid); //setTimeout()でセットしたタイマーを解除する際に使用
     stopTime += Date.now() - startTime;
-  },false);
+    if (timer.textContent.substring(0, 5) === "00:10") {
+      soundStop2.play();
+      document.body.style.backgroundImage = "url('img/fireworks.gif')";
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center center";
+      document.body.style.backgroundColor = "transparent";
+    }
+    else {
+      soundStop1.play();
+    }
+
+
+  }, false);
 
 
 ////////////////////////
 // Resetボタンクリック
 ////////////////////////
-reset.addEventListener("click", 
-  function() {
+reset.addEventListener("click",
+  function () {
     // ボタンを"初期"状態とする
     setButtonStateInitial();
     timer.textContent = "00:00.000";
     stopTime = 0;
+    soundReset.play();
+    document.body.style.backgroundImage = "";
+    document.body.style.backgroundColor = "rgba(233,168,227,0.6)";
+
   }
 );
 
